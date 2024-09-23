@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Register</h1>
+        <form method="POST" action="{{ url_for('register') }}">
+            {{ form.hidden_tag() }}
+            <p>
+                {{ form.username.label }}<br>
+                {{ form.username(size=32) }}<br>
+                {% for error in form.username.errors %}
+                    <span class="alert alert-danger">{{ error }}</span>
+                {% endfor %}
+            </p>
+            <p>
+                {{ form.password.label }}<br>
+                {{ form.password(size=32) }}<br>
+                {% for error in form.password.errors %}
+                    <span class="alert alert-danger">{{ error }}</span>
+                {% endfor %}
+            </p>
+            <p>
+                {{ form.confirm_password.label }}<br>
+                {{ form.confirm_password(size=32) }}<br>
+                {% for error in form.confirm_password.errors %}
+                    <span class="alert alert-danger">{{ error }}</span>
+                {% endfor %}
+            </p>
+            <p>
+                {{ form.user_type.label }}<br>
+                {{ form.user_type() }}<br>
+                {% for error in form.user_type.errors %}
+                    <span class="alert alert-danger">{{ error }}</span>
+                {% endfor %}
+            </p>
+            <p>
+                {{ form.estabelecimento.label }}<br>
+                {{ form.estabelecimento(size=32) }}<br>
+                {% for error in form.estabelecimento.errors %}
+                    <span class="alert alert-danger">{{ error }}</span>
+                {% endfor %}
+            </p>
+            <p>
+                {{ form.endereco.label }}<br>
+                {{ form.endereco(size=64) }}<br>
+                {% for error in form.endereco.errors %}
+                    <span class="alert alert-danger">{{ error }}</span>
+                {% endfor %}
+            </p>
+            <p>
+                {{ form.telefone.label }}<br>
+                {{ form.telefone(size=20) }}<br>
+                {% for error in form.telefone.errors %}
+                    <span class="alert alert-danger">{{ error }}</span>
+                {% endfor %}
+            </p>
+            <p>{{ form.submit(class_="button") }}</p>
+        </form>
+        <p>Already have an account? <a href="{{ url_for('login') }}">Login here</a></p>
+    </div>
+</body>
+</html>

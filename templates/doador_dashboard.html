@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donor Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome, {{ estabelecimento }}!</h1> <!-- Nome do estabelecimento logado -->
+        <h2>Add New Food for Donation</h2>
+        <!-- Formulário para adicionar novos alimentos -->
+        <form method="POST" action="{{ url_for('doador_dashboard') }}">
+            {{ form.hidden_tag() }}
+            <p>
+                {{ form.nome.label }}<br>
+                {{ form.nome(size=32) }}<br>
+                {% for error in form.nome.errors %}
+                    <span class="alert alert-danger">{{ error }}</span>
+                {% endfor %}
+            </p>
+            <p>
+                {{ form.quantidade.label }}<br>
+                {{ form.quantidade(size=32) }}<br>
+                {% for error in form.quantidade.errors %}
+                    <span class="alert alert-danger">{{ error }}</span>
+                {% endfor %}
+            </p>
+            <p>{{ form.submit(class_="button") }}</p>
+        </form>
+
+        <h2>Your Donated Foods</h2>
+        <table>
+            <tr>
+                <th>Food Name</th>
+                <th>Quantity (kg)</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+            {% for alimento in alimentos %}
+            <tr>
+                <td>{{ alimento.nome }}</td>
+                <td>{{ alimento.quantidade }}</td>
+                <td>{{ alimento.status }}</td>
+                <td>
+                    {% if alimento.status != 'Donated' %}
+                    <!-- Formulário para mudar o status para "Donated" -->
+                    <form method="POST" action="{{ url_for('atualizar_status', alimento_id=alimento.id, new_status='Donated') }}">
+                        <button type="submit">Mark as "Donated"</button>
+                    </form>
+                    {% else %}
+                    <form method="POST" action="{{ url_for('atualizar_status', alimento_id=alimento.id, new_status='Available') }}">
+                        <button type="submit">Mark as "Available"</button>
+                    </form>
+                    {% endif %}
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="4">No food donations made yet.</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <a href="{{ url_for('logout') }}">Logout</a>
+    </div>
+</body>
+</html>

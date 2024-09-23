@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ONG Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome, {{ nome_ong }}!</h1> <!-- Nome da ONG logada -->
+        <h2>Available Foods for Donation</h2>
+        <table>
+            <tr>
+                <th>Food Name</th>
+                <th>Quantity (kg)</th>
+                <th>Donor Name</th>
+                <th>Donor Address</th>
+                <th>Donor Phone</th>
+            </tr>
+            {% for alimento in alimentos %}
+            <tr>
+                <td>{{ alimento.nome }}</td>
+                <td>{{ alimento.quantidade }}</td>
+                <td>{{ alimento.doador.estabelecimento }}</td> <!-- Nome do Estabelecimento -->
+                <td>{{ alimento.doador.endereco }}</td> <!-- Endereço do Doador -->
+                <td>{{ alimento.doador.telefone }}</td> <!-- Telefone do Doador -->
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="5">No available food donations at the moment.</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <a href="{{ url_for('logout') }}">Logout</a>
+    </div>
+</body>
+</html>

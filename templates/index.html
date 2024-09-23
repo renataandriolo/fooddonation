@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entrada de Dados - Alimentos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Food info</h1>
+    <form action="/" method="POST">
+        <label for="nome">Food Name:</label><br>
+        <input type="text" id="nome" name="nome" required><br><br>
+
+        <label for="quantidade">Quantity (kg):</label><br>
+        <input type="number" id="quantidade" name="quantidade" step="0.1" required><br><br>
+
+        <label for="local">Organization to donate:</label><br>
+        <input type="text" id="local" name="local" required><br><br>
+
+        <button type="submit">Send</button>
+    </form>
+    <a href="/ong">Organization access</a>
+</body>
+</html>
