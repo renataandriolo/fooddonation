@@ -62,7 +62,7 @@ class RegistrationForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired(), Length(min=4, max=25)])
     password = PasswordField('Password', validators=[DataRequired(), Length(min=6, max=25)])
     confirm_password = PasswordField('Confirm Password', validators=[DataRequired(), EqualTo('password')])
-    user_type = SelectField('Account Type', choices=[('Doador', 'Donor'), ('ONG', 'NGO')], validators=[DataRequired()])
+    user_type = SelectField('Account Type', choices=[('Doador', 'Donor'), ('ONG', 'ONG')], validators=[DataRequired()])
     estabelecimento = StringField('Establishment Name')  # Campo para nome do estabelecimento (opcional)
     endereco = StringField('Address', validators=[Length(min=10, max=250)])  # Campo para endereço
     telefone = StringField('Phone', validators=[Length(min=10, max=20)])  # Campo para telefone
